@@ -1,7 +1,4 @@
-FROM nginx:1.19-alpine
-ARG nginx_uid=82
-ARG nginx_gid=82
-RUN set -ex \
-&& apk add --no-cache shadow \
-&& usermod -u $nginx_uid -o nginx \
-&& groupmod -g $nginx_gid -o nginx
+FROM fluent/fluentd:v1.6-debian-1
+USER root
+RUN ["gem", "install", "fluent-plugin-elasticsearch", "--no-document", "--version", "3.5.2"]
+USER fluent
